@@ -1,13 +1,21 @@
 import { createStore } from "vuex";
+import { Task } from "@/types";
 
 export default createStore({
   state: {
-    todoList: [],
+    tasks: [] as Task[],
   },
-  getters: {},
   mutations: {
-    addTodoItem(state, item) {
-      state.todoList.push(item);
+    addTask(state, task: Task) {
+      state.tasks.push({
+        ...task,
+        id: new Date().getTime(),
+      });
+    },
+  },
+  getters: {
+    getTasks(state) {
+      return state.tasks;
     },
   },
   actions: {},

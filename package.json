@@ -1,12 +1,21 @@
 {
   "name": "mirach",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vue-cli-service serve ./src/main.ts --open",
+    "build": "vue-cli-service build --name mirach --entry ./src/index.ts --target lib",
+    "lint": "vue-cli-service lint",
+    "prepublishOnly": "npm run lint && npm run build"
   },
+  "main": "dist/mirach.umd.js",
+  "module": "dist/mirach.common.min.js",
+  "files": [
+    "dist/*.css",
+    "dist/*.map",
+    "dist/*.js",
+    "src/*"
+  ],
   "dependencies": {
     "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
@@ -28,13 +37,12 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-compat": "^4.1.2",
     "eslint-plugin-vue": "^8.0.3",
-    "prettier": "^2.4.1",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "vue-cli-plugin-component": "~1.12.2"
   },
   "eslintConfig": {
     "root": true,
@@ -44,8 +52,7 @@
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended",
-      "@vue/typescript/recommended",
-      "plugin:prettier/recommended"
+      "@vue/typescript/recommended"
     ],
     "parserOptions": {
       "ecmaVersion": 2020
@@ -57,5 +64,9 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
+  ],
+  "keywords": [
+    "vue",
+    "component"
   ]
 }

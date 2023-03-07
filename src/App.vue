@@ -1,30 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div>
+    <h1>Todo List</h1>
+    <add-task @add-task="addTask" />
+    <todo-list :tasks="tasks" />
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapState, mapMutations } from "vuex";
+import AddTask from "./components/AddTask.vue";
+import TodoList from "./components/TodoList.vue";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  name: "App",
+  components: {
+    AddTask,
+    TodoList,
+  },
+  computed: {
+    ...mapState({
+      tasks: "tasks",
+    }),
+  },
+  methods: {
+    ...mapMutations({
+      addTask: "addTask",
+    }),
+  },
+};
+</script>
